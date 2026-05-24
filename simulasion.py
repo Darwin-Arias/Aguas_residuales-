@@ -1,132 +1,188 @@
-import mysql.connector
-from datetime import datetime, time
-import tkinter as tk
-from tkinter import messagebox
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
-HORA_ENTRADA_OFICIAL = time(8, 0)
+# ==============================
+# SIMULACION CASO AQUALIMPIA S.A.
+# ==============================
 
-def obtener_conexion():
-    return mysql.connector.connect(
-        host="localhost",
-        user="USUARIO_SEGURO",
-        password="CONTRASEÑA_SEGURA",
-        database="registro_asistencia_inatrans"
-    )
+np.random.seed(42)
 
-def calcular_atraso(hora_ingreso_str):
-    hora_i = datetime.strptime(hora_ingreso_str, "%H:%M").time()
-    if hora_i > HORA_ENTRADA_OFICIAL:
-        hoy = datetime.now().date()
-        dt_oficial = datetime.combine(hoy, HORA_ENTRADA_OFICIAL)
-        dt_ingreso = datetime.combine(hoy, hora_i)
-        diferencia = dt_ingreso - dt_oficial
-        return int(diferencia.total_seconds() / 60)
-    return 0
+# 1. Crear datos simulados
+n_registros = 200
 
-def calcular_jornada(I, SC, RC, E):
-    fmt = "%H:%M"
-    hoy = datetime.now().date()
-    dt_i = datetime.strptime(f"{hoy} {I}", f"{hoy} {fmt}")
-    dt_sc = datetime.strptime(f"{hoy} {SC}", f"{hoy} {fmt}")
-    dt_rc = datetime.strptime(f"{hoy} {RC}", f"{hoy} {fmt}")
-    dt_e = datetime.strptime(f"{hoy} {E}", f"{hoy} {fmt}")
-    return (dt_sc - dt_i) + (dt_e - dt_rc)
+plantas = ["Planta Norte", "Planta Centro", "Planta Sur", "Planta Industrial"]
+fechas = pd.date_range(start="2025-07-01", periods=120, freq="D")
 
-def marcar_ahora(entry):
-    ahora = datetime.now().strftime("%H:%M")
-    entry.delete(0, tk.END)
-    entry.insert(0, ahora)
+df = pd.DataFrame({
+    "fecha_registro": np.random.choice(fechas, n_registros),
+    "planta": np.random.choice(plantas, n_registros),
+    "caudal_entrada_m3_d": np.random.randint(4000, 9000, n_registros),
+    "DBO_entrada_mg_L": np.random.randint(180, 380, n_registros),
+    "SST_entrada_mg_L": np.random.randint(150, 350, n_registros),
+    "pH_entrada": np.round(np.random.normal(7.1, 0.35, n_registros), 2),
+    "energia_aeracion_kWh": np.round(np.random.uniform(900, 2100, n_registros), 1),
+    "lodos_generados_kg_d": np.round(np.random.uniform(350, 750, n_registros), 1)
+})
 
-def enviar_datos():
-    id_emp = entry_id.get().strip()
-    h_i = entry_i.get().strip()
-    h_sc = entry_sc.get().strip()
-    h_rc = entry_rc.get().strip()
-    h_e = entry_e.get().strip()
+# 2. Simular DBO de salida según eficiencia del tratamiento
+# Una mayor eficiencia genera menor DBO de salida
+eficiencia_simulada = np.random.uniform(0.82, 0.94, n_registros)
 
-    if not id_emp:
-        messagebox.showwarning("Atención", "Ingrese ID de empleado")
-        return
+# Penalizar algunos registros para simular fallas intermitentes
+fallas = np.random.choice([0, 1], size=n_registros, p=[0.78, 0.22])
+eficiencia_simulada = eficiencia_simulada - (fallas * np.random.uniform(0.08, 0.18, n_registros))
 
-    try:
-        conn = obtener_conexion()
-        cursor = conn.cursor()
-        fecha_hoy = datetime.now().date()
+df["DBO_salida_mg_L"] = np.round(
+    df["DBO_entrada_mg_L"] * (1 - eficiencia_simulada),
+    1
+)
 
-        cursor.execute("SELECT nombre_completo FROM empleados WHERE id_empleado = %s", (id_emp,))
-        empleado = cursor.fetchone()
-        
-        if not empleado:
-            messagebox.showerror("Error", "ID no encontrado")
-            return
-        
-        nombre_trabajador = empleado[0]
+# 3. Definir cumplimiento normativo
+# Supuesto: cumple si la DBO de salida es menor o igual a 35 mg/L
+limite_DBO = 35
 
-        cursor.execute("SELECT id_registro FROM registro_asistencia WHERE id_empleado_fk = %s AND fecha = %s", (id_emp, fecha_hoy))
-        registro = cursor.fetchone()
+df["cumplimiento_norma"] = np.where(
+    df["DBO_salida_mg_L"] <= limite_DBO,
+    1,
+    0
+)
 
-        if not registro:
-            if not h_i:
-                messagebox.showwarning("Atención", "Debe marcar el Ingreso primero")
-                return
-            
-            minutos_atraso = calcular_atraso(h_i)
-            sql = "INSERT INTO registro_asistencia (id_empleado_fk, fecha, ingreso, atraso_minutos) VALUES (%s, %s, %s, %s)"
-            val = (id_emp, fecha_hoy, f"{fecha_hoy} {h_i}", minutos_atraso)
-            cursor.execute(sql, val)
-            msg = f"¡Hola {nombre_trabajador}!\nIngreso registrado correctamente."
-            if minutos_atraso > 0:
-                msg += f"\nNota: {minutos_atraso} min. de atraso."
-        else:
-            id_reg = registro[0]
-            if h_e:
-                sql = "UPDATE registro_asistencia SET egreso = %s WHERE id_registro = %s"
-                cursor.execute(sql, (f"{fecha_hoy} {h_e}", id_reg))
-                msg = f"Salida registrada para {nombre_trabajador}."
-            elif h_rc:
-                sql = "UPDATE registro_asistencia SET regreso_colacion = %s WHERE id_registro = %s"
-                cursor.execute(sql, (f"{fecha_hoy} {h_rc}", id_reg))
-                msg = "Regreso de colación registrado."
-            elif h_sc:
-                sql = "UPDATE registro_asistencia SET salida_colacion = %s WHERE id_registro = %s"
-                cursor.execute(sql, (f"{fecha_hoy} {h_sc}", id_reg))
-                msg = "Salida a colación registrada."
-            else:
-                msg = "Ya tienes un registro de ingreso hoy."
+df["estado_cumplimiento"] = np.where(
+    df["cumplimiento_norma"] == 1,
+    "Cumple",
+    "No cumple"
+)
 
-        conn.commit()
-        messagebox.showinfo("Éxito", msg)
+# 4. Calcular indicadores analíticos
+df["eficiencia_remocion_DBO_pct"] = np.round(
+    ((df["DBO_entrada_mg_L"] - df["DBO_salida_mg_L"]) /
+     df["DBO_entrada_mg_L"]) * 100,
+    2
+)
 
-    except Exception as e:
-        messagebox.showerror("Error", f"Error: {e}")
-    finally:
-        if 'conn' in locals() and conn.is_connected():
-            conn.close()
+df["carga_DBO_entrada_kg_d"] = np.round(
+    df["caudal_entrada_m3_d"] * df["DBO_entrada_mg_L"] / 1000,
+    2
+)
 
-root = tk.Tk()
-root.title("Inatrans - Registro Oficial")
-root.geometry("350x500")
+df["carga_DBO_salida_kg_d"] = np.round(
+    df["caudal_entrada_m3_d"] * df["DBO_salida_mg_L"] / 1000,
+    2
+)
 
-tk.Label(root, text="ID Empleado:", font=('Arial', 10, 'bold')).pack(pady=10)
-entry_id = tk.Entry(root, justify='center', font=('Arial', 12))
-entry_id.pack()
+df["energia_por_m3_kWh"] = np.round(
+    df["energia_aeracion_kWh"] / df["caudal_entrada_m3_d"],
+    4
+)
 
-def crear_fila(texto):
-    frame = tk.Frame(root)
-    frame.pack(pady=5)
-    tk.Label(frame, text=texto, width=15).grid(row=0, column=0)
-    ent = tk.Entry(frame, width=10)
-    ent.grid(row=0, column=1)
-    tk.Button(frame, text="Marcar", command=lambda: marcar_ahora(ent)).grid(row=0, column=2, padx=5)
-    return ent
+# 5. Crear alerta operativa
+df["alerta_operativa"] = np.where(
+    (df["cumplimiento_norma"] == 0) |
+    (df["eficiencia_remocion_DBO_pct"] < 85),
+    "Alerta",
+    "Normal"
+)
 
-entry_i = crear_fila("Ingreso:")
-entry_sc = crear_fila("Salida Colación:")
-entry_rc = crear_fila("Regreso Colación:")
-entry_e = crear_fila("Egreso:")
+# 6. Resumen por planta
+resumen_planta = df.groupby("planta").agg(
+    registros=("planta", "count"),
+    caudal_promedio=("caudal_entrada_m3_d", "mean"),
+    DBO_entrada_promedio=("DBO_entrada_mg_L", "mean"),
+    DBO_salida_promedio=("DBO_salida_mg_L", "mean"),
+    eficiencia_promedio=("eficiencia_remocion_DBO_pct", "mean"),
+    cumplimiento_promedio=("cumplimiento_norma", "mean"),
+    alertas=("alerta_operativa", lambda x: (x == "Alerta").sum())
+).reset_index()
 
-btn_guardar = tk.Button(root, text="GUARDAR REGISTRO", command=enviar_datos, 
-                        bg="#007bff", fg="white", font=('Arial', 10, 'bold'), height=2, width=25)
-btn_guardar.pack(pady=30)
+resumen_planta["cumplimiento_promedio"] = resumen_planta["cumplimiento_promedio"] * 100
+resumen_planta = resumen_planta.round(2)
 
-root.mainloop()
+print("RESUMEN POR PLANTA")
+print(resumen_planta)
+
+print("\nREGISTROS CON ALERTA OPERATIVA")
+print(df[df["alerta_operativa"] == "Alerta"].head())
+
+# 7. Crear archivos de salida para distintas áreas
+
+# Área de Operaciones
+salida_operaciones = df[[
+    "fecha_registro",
+    "planta",
+    "caudal_entrada_m3_d",
+    "DBO_entrada_mg_L",
+    "DBO_salida_mg_L",
+    "energia_aeracion_kWh",
+    "lodos_generados_kg_d",
+    "eficiencia_remocion_DBO_pct",
+    "alerta_operativa"
+]]
+
+# Área de Gestión Ambiental
+salida_gestion_ambiental = df[[
+    "fecha_registro",
+    "planta",
+    "DBO_salida_mg_L",
+    "estado_cumplimiento",
+    "cumplimiento_norma"
+]]
+
+salida_operaciones.to_csv("salida_operaciones.csv", index=False, encoding="utf-8-sig")
+salida_gestion_ambiental.to_csv("salida_gestion_ambiental.csv", index=False, encoding="utf-8-sig")
+resumen_planta.to_csv("resumen_por_planta.csv", index=False, encoding="utf-8-sig")
+
+# 8. Visualizaciones exploratorias
+
+plt.figure(figsize=(8, 5))
+plt.bar(resumen_planta["planta"], resumen_planta["cumplimiento_promedio"])
+plt.axhline(90, color="red", linestyle="--", label="Meta referencial 90%")
+plt.title("Cumplimiento normativo promedio por planta")
+plt.xlabel("Planta")
+plt.ylabel("Cumplimiento (%)")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(8, 5))
+plt.scatter(
+    df["caudal_entrada_m3_d"],
+    df["DBO_salida_mg_L"],
+    c=df["cumplimiento_norma"],
+    cmap="coolwarm",
+    alpha=0.7
+)
+plt.axhline(limite_DBO, color="red", linestyle="--", label="Limite DBO")
+plt.title("Relacion entre caudal de entrada y DBO de salida")
+plt.xlabel("Caudal de entrada (m3/d)")
+plt.ylabel("DBO de salida (mg/L)")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(8, 5))
+plt.boxplot(
+    [df[df["planta"] == planta]["eficiencia_remocion_DBO_pct"] for planta in plantas],
+    labels=plantas
+)
+plt.title("Distribucion de eficiencia de remocion de DBO por planta")
+plt.xlabel("Planta")
+plt.ylabel("Eficiencia de remocion (%)")
+plt.tight_layout()
+plt.show()
+
+# 9. Interpretacion final automatizada
+
+cumplimiento_global = df["cumplimiento_norma"].mean() * 100
+eficiencia_global = df["eficiencia_remocion_DBO_pct"].mean()
+total_alertas = (df["alerta_operativa"] == "Alerta").sum()
+
+print("\nINTERPRETACION GENERAL")
+print(f"Cumplimiento normativo global: {cumplimiento_global:.2f}%")
+print(f"Eficiencia promedio de remocion de DBO: {eficiencia_global:.2f}%")
+print(f"Total de alertas operativas detectadas: {total_alertas}")
+
+if cumplimiento_global < 90:
+    print("Se recomienda priorizar acciones correctivas en las plantas con menor cumplimiento.")
+else:
+    print("El desempeño general es aceptable, aunque se deben revisar las alertas puntuales.")
