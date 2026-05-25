@@ -1,0 +1,8 @@
+﻿variable,minimo_esperado,maximo_esperado,registros_fuera_rango
+caudal_entrada_m3_d,0,15000,0
+DBO_entrada_mg_L,0,600,0
+SST_entrada_mg_L,0,600,0
+pH_entrada,6,9,0
+energia_aeracion_kWh,0,3000,0
+lodos_generados_kg_d,0,1200,0
+DBO_salida_mg_L,0,100,0

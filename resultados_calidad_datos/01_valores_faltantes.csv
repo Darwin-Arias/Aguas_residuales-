@@ -1,0 +1,11 @@
+﻿variable,valores_faltantes,porcentaje_faltantes
+fecha_registro,0,0.0
+planta,0,0.0
+caudal_entrada_m3_d,0,0.0
+DBO_entrada_mg_L,0,0.0
+SST_entrada_mg_L,0,0.0
+pH_entrada,0,0.0
+energia_aeracion_kWh,0,0.0
+lodos_generados_kg_d,0,0.0
+DBO_salida_mg_L,0,0.0
+cumplimiento_norma,0,0.0
