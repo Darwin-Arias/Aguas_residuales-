@@ -1,0 +1,4 @@
+﻿planta,registros,caudal_promedio,DBO_entrada_promedio,DBO_salida_promedio,eficiencia_promedio,cumplimiento_promedio,alertas
+Planta Centro,75,5112.72,285.19,35.9,87.51,22.67,58
+Planta Norte,71,5287.87,275.85,36.56,86.65,16.9,60
+Planta Sur,54,4684.52,278.8,36.06,87.1,29.63,38

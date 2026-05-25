@@ -1,0 +1,201 @@
+﻿fecha_registro,planta,DBO_salida_mg_L,estado_cumplimiento,cumplimiento_norma
+2025-08-17,Planta Sur,40.0,No cumple,0
+2025-09-07,Planta Sur,26.8,Cumple,1
+2025-07-26,Planta Norte,45.2,No cumple,0
+2025-10-27,Planta Centro,38.0,No cumple,0
+2025-09-06,Planta Centro,32.1,No cumple,0
+2025-09-22,Planta Norte,31.7,No cumple,0
+2025-07-24,Planta Centro,49.7,No cumple,0
+2025-10-12,Planta Centro,30.5,No cumple,0
+2025-10-01,Planta Sur,37.7,No cumple,0
+2025-08-27,Planta Sur,31.5,No cumple,0
+2025-07-15,Planta Norte,45.1,No cumple,0
+2025-07-24,Planta Norte,21.3,No cumple,0
+2025-09-11,Planta Centro,36.8,No cumple,0
+2025-09-28,Planta Norte,19.8,No cumple,0
+2025-10-19,Planta Norte,51.6,No cumple,0
+2025-08-12,Planta Centro,26.4,Cumple,1
+2025-09-29,Planta Norte,47.6,No cumple,0
+2025-07-09,Planta Sur,10.2,Cumple,1
+2025-08-09,Planta Sur,20.2,Cumple,1
+2025-10-11,Planta Norte,28.6,No cumple,0
+2025-09-07,Planta Centro,46.3,No cumple,0
+2025-08-18,Planta Sur,20.6,Cumple,1
+2025-07-08,Planta Sur,32.9,No cumple,0
+2025-08-14,Planta Norte,39.3,No cumple,0
+2025-07-01,Planta Norte,79.0,No cumple,0
+2025-09-14,Planta Sur,11.8,Cumple,1
+2025-08-25,Planta Sur,41.6,No cumple,0
+2025-07-07,Planta Norte,37.1,No cumple,0
+2025-07-20,Planta Centro,32.5,No cumple,0
+2025-08-30,Planta Centro,20.9,Cumple,1
+2025-08-14,Planta Sur,15.0,Cumple,1
+2025-09-02,Planta Norte,36.6,No cumple,0
+2025-09-08,Planta Centro,46.6,No cumple,0
+2025-08-26,Planta Sur,45.8,No cumple,0
+2025-07-25,Planta Centro,27.5,Cumple,1
+2025-08-25,Planta Norte,39.5,No cumple,0
+2025-08-23,Planta Norte,21.3,Cumple,1
+2025-10-21,Planta Norte,40.7,No cumple,0
+2025-08-31,Planta Sur,43.6,No cumple,0
+2025-09-03,Planta Norte,49.0,No cumple,0
+2025-08-04,Planta Norte,31.8,No cumple,0
+2025-08-26,Planta Centro,43.5,No cumple,0
+2025-09-12,Planta Norte,26.2,No cumple,0
+2025-09-17,Planta Norte,45.0,No cumple,0
+2025-08-08,Planta Norte,61.8,No cumple,0
+2025-07-05,Planta Centro,17.7,Cumple,1
+2025-10-19,Planta Centro,35.4,No cumple,0
+2025-07-10,Planta Centro,31.9,No cumple,0
+2025-09-26,Planta Norte,64.3,No cumple,0
+2025-10-08,Planta Centro,51.0,No cumple,0
+2025-09-06,Planta Centro,21.5,No cumple,0
+2025-09-11,Planta Sur,55.8,No cumple,0
+2025-09-22,Planta Sur,39.9,No cumple,0
+2025-08-18,Planta Norte,26.3,Cumple,1
+2025-07-02,Planta Norte,32.0,No cumple,0
+2025-09-03,Planta Sur,25.9,No cumple,0
+2025-07-17,Planta Sur,33.7,No cumple,0
+2025-10-27,Planta Centro,25.7,Cumple,1
+2025-08-01,Planta Sur,19.9,Cumple,1
+2025-10-02,Planta Sur,56.0,No cumple,0
+2025-08-14,Planta Centro,47.0,No cumple,0
+2025-10-01,Planta Sur,28.2,Cumple,1
+2025-09-10,Planta Norte,16.5,No cumple,0
+2025-07-24,Planta Norte,30.5,No cumple,0
+2025-07-11,Planta Norte,36.3,No cumple,0
+2025-10-14,Planta Norte,24.7,Cumple,1
+2025-08-05,Planta Sur,25.4,Cumple,1
+2025-09-03,Planta Norte,47.8,No cumple,0
+2025-08-31,Planta Centro,70.2,No cumple,0
+2025-07-08,Planta Norte,25.1,No cumple,0
+2025-07-24,Planta Centro,28.9,No cumple,0
+2025-10-01,Planta Centro,22.5,Cumple,1
+2025-10-28,Planta Norte,32.9,No cumple,0
+2025-10-05,Planta Centro,35.6,No cumple,0
+2025-07-22,Planta Centro,29.2,No cumple,0
+2025-10-09,Planta Centro,38.1,No cumple,0
+2025-08-05,Planta Centro,48.0,No cumple,0
+2025-10-06,Planta Norte,38.4,No cumple,0
+2025-09-06,Planta Norte,25.0,No cumple,0
+2025-09-30,Planta Centro,16.7,Cumple,1
+2025-10-06,Planta Centro,15.9,No cumple,0
+2025-07-20,Planta Norte,24.7,No cumple,0
+2025-07-28,Planta Sur,58.5,No cumple,0
+2025-07-05,Planta Sur,42.8,No cumple,0
+2025-07-20,Planta Norte,36.5,No cumple,0
+2025-08-03,Planta Centro,26.1,Cumple,1
+2025-07-31,Planta Norte,33.3,No cumple,0
+2025-08-27,Planta Centro,40.5,No cumple,0
+2025-10-10,Planta Norte,23.0,Cumple,1
+2025-09-12,Planta Centro,37.7,No cumple,0
+2025-10-02,Planta Sur,28.2,Cumple,1
+2025-09-20,Planta Centro,26.0,No cumple,0
+2025-08-01,Planta Centro,48.2,No cumple,0
+2025-07-03,Planta Centro,64.9,No cumple,0
+2025-09-22,Planta Sur,51.2,No cumple,0
+2025-08-20,Planta Norte,21.9,No cumple,0
+2025-07-19,Planta Centro,26.4,No cumple,0
+2025-07-22,Planta Sur,46.8,No cumple,0
+2025-10-28,Planta Centro,55.5,No cumple,0
+2025-09-06,Planta Norte,38.6,No cumple,0
+2025-09-14,Planta Centro,16.2,Cumple,1
+2025-08-28,Planta Centro,13.4,Cumple,1
+2025-08-17,Planta Centro,25.2,No cumple,0
+2025-07-17,Planta Norte,33.9,No cumple,0
+2025-07-13,Planta Sur,46.2,No cumple,0
+2025-10-02,Planta Sur,37.5,No cumple,0
+2025-10-16,Planta Centro,29.3,No cumple,0
+2025-10-14,Planta Centro,26.5,Cumple,1
+2025-07-10,Planta Norte,32.9,No cumple,0
+2025-09-15,Planta Sur,34.4,No cumple,0
+2025-09-06,Planta Sur,41.3,No cumple,0
+2025-10-19,Planta Centro,14.5,Cumple,1
+2025-07-15,Planta Sur,14.6,Cumple,1
+2025-07-21,Planta Norte,28.0,Cumple,1
+2025-08-23,Planta Centro,30.4,No cumple,0
+2025-07-16,Planta Norte,38.9,No cumple,0
+2025-08-29,Planta Centro,34.4,No cumple,0
+2025-08-05,Planta Norte,49.0,No cumple,0
+2025-08-18,Planta Sur,46.5,No cumple,0
+2025-07-05,Planta Centro,35.5,No cumple,0
+2025-08-13,Planta Centro,47.6,No cumple,0
+2025-09-11,Planta Norte,26.4,Cumple,1
+2025-09-29,Planta Centro,16.2,Cumple,1
+2025-08-24,Planta Sur,56.0,No cumple,0
+2025-08-13,Planta Centro,39.9,No cumple,0
+2025-10-20,Planta Norte,18.6,Cumple,1
+2025-09-26,Planta Sur,30.3,No cumple,0
+2025-09-16,Planta Norte,39.2,No cumple,0
+2025-08-20,Planta Sur,46.9,No cumple,0
+2025-08-09,Planta Centro,25.6,No cumple,0
+2025-07-04,Planta Norte,24.0,No cumple,0
+2025-07-30,Planta Centro,11.4,Cumple,1
+2025-07-13,Planta Centro,48.1,No cumple,0
+2025-09-15,Planta Norte,33.9,No cumple,0
+2025-09-18,Planta Sur,52.5,No cumple,0
+2025-07-30,Planta Centro,45.0,No cumple,0
+2025-07-09,Planta Sur,49.7,No cumple,0
+2025-08-24,Planta Sur,34.9,No cumple,0
+2025-08-08,Planta Norte,24.6,No cumple,0
+2025-10-26,Planta Centro,50.4,No cumple,0
+2025-09-09,Planta Centro,31.1,No cumple,0
+2025-07-22,Planta Sur,56.9,No cumple,0
+2025-08-14,Planta Centro,25.6,Cumple,1
+2025-09-30,Planta Centro,25.4,No cumple,0
+2025-07-08,Planta Sur,49.0,No cumple,0
+2025-09-20,Planta Norte,38.2,No cumple,0
+2025-10-15,Planta Centro,45.9,No cumple,0
+2025-10-20,Planta Centro,26.9,No cumple,0
+2025-09-08,Planta Norte,26.5,Cumple,1
+2025-10-09,Planta Sur,32.3,No cumple,0
+2025-08-22,Planta Centro,62.1,No cumple,0
+2025-10-14,Planta Sur,28.5,Cumple,1
+2025-08-11,Planta Centro,55.0,No cumple,0
+2025-07-30,Planta Centro,36.8,No cumple,0
+2025-07-27,Planta Sur,33.0,No cumple,0
+2025-09-03,Planta Norte,40.9,No cumple,0
+2025-09-01,Planta Norte,61.2,No cumple,0
+2025-09-25,Planta Centro,56.9,No cumple,0
+2025-10-07,Planta Centro,19.2,Cumple,1
+2025-07-13,Planta Centro,52.6,No cumple,0
+2025-07-07,Planta Sur,25.2,No cumple,0
+2025-10-13,Planta Centro,42.1,No cumple,0
+2025-08-04,Planta Sur,22.5,Cumple,1
+2025-08-29,Planta Centro,27.4,Cumple,1
+2025-10-15,Planta Centro,44.1,No cumple,0
+2025-10-19,Planta Norte,54.1,No cumple,0
+2025-10-25,Planta Norte,76.8,No cumple,0
+2025-10-22,Planta Sur,44.0,No cumple,0
+2025-10-02,Planta Centro,52.5,No cumple,0
+2025-10-11,Planta Norte,23.3,No cumple,0
+2025-10-15,Planta Norte,20.0,Cumple,1
+2025-07-18,Planta Sur,23.5,No cumple,0
+2025-07-06,Planta Norte,33.4,No cumple,0
+2025-09-18,Planta Sur,25.8,Cumple,1
+2025-08-19,Planta Norte,57.3,No cumple,0
+2025-08-24,Planta Sur,40.7,No cumple,0
+2025-09-15,Planta Centro,36.1,No cumple,0
+2025-10-14,Planta Norte,61.3,No cumple,0
+2025-10-13,Planta Sur,39.8,No cumple,0
+2025-10-01,Planta Centro,29.0,No cumple,0
+2025-08-24,Planta Centro,46.1,No cumple,0
+2025-08-17,Planta Centro,37.6,No cumple,0
+2025-08-07,Planta Norte,39.2,No cumple,0
+2025-09-12,Planta Norte,37.6,No cumple,0
+2025-09-26,Planta Norte,34.2,No cumple,0
+2025-07-22,Planta Norte,20.5,No cumple,0
+2025-07-05,Planta Norte,46.7,No cumple,0
+2025-09-30,Planta Norte,45.4,No cumple,0
+2025-09-15,Planta Sur,33.5,No cumple,0
+2025-10-14,Planta Norte,55.2,No cumple,0
+2025-09-14,Planta Centro,43.3,No cumple,0
+2025-07-07,Planta Norte,11.1,Cumple,1
+2025-10-06,Planta Norte,29.5,Cumple,1
+2025-09-24,Planta Sur,28.5,Cumple,1
+2025-09-24,Planta Sur,23.1,Cumple,1
+2025-07-31,Planta Centro,54.2,No cumple,0
+2025-10-16,Planta Norte,20.9,Cumple,1
+2025-10-01,Planta Sur,60.0,No cumple,0
+2025-08-26,Planta Norte,37.1,No cumple,0
+2025-08-21,Planta Centro,41.7,No cumple,0
